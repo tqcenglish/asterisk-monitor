@@ -2,4 +2,4 @@
 
 ## DEMO
 
-![效果]("./demo.jpg")
+![效果](./demo.jpg)
