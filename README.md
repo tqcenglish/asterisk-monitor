@@ -1,5 +1,1 @@
-<h1 align="center">电话系统--监控</h1>
-
-## DEMO
-
-![效果](./demo.jpg)
+# 简单的 asterisk 信息监控
