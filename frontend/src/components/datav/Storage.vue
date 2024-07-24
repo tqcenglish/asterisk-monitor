@@ -40,6 +40,18 @@ export default {
         color: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b']
       }
     }
+  },
+  created: function () {
+    fetch('http://127.0.0.1:8080/api/storageinfo').then((res) => {
+      res.json().then((data) => {
+        this.option.series[0].data[0].value = data.record
+        this.option.series[0].data[1].value = data.system
+        this.option.series[0].data[2].value = data.voicemail
+        this.option.series[0].data[3].value = data.music
+        this.option.series[0].data[4].value = data.other
+        this.option = { ...this.option }
+      })
+    })
   }
 }
 </script>

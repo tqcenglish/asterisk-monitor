@@ -1,7 +1,7 @@
 <template>
   <div class="left-chart-1">
     <div class="lc1-header">设备信息</div>
-    <div class="lc1-details">运行时间<span>430</span></div>
+    <div class="lc1-details">无故障运行时间<span>99 小时 </span></div>
     <dv-capsule-chart class="lc1-chart" :config="config" />
     <dv-decoration-2 style="height:10px;" />
   </div>
@@ -16,29 +16,32 @@ export default {
         data: [
           {
             name: 'Web 服务时间',
-            value: 167
+            value: 10
           },
           {
             name: 'Asterisk 服务时间',
-            value: 67
+            value: 10
           },
           {
-            name: 'Mysql 服务时间',
-            value: 123
-          },
-          {
-            name: '其他服务',
-            value: 55
-          },
-          {
-            name: '其他',
-            value: 98
+            name: '系统启动时间',
+            value: 10
           }
         ],
-        colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
+        // colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
+        colors: ['#00baff', '#3de7c9', '#ffc530'],
         unit: '小时'
       }
     }
+  },
+  created: function () {
+    fetch('http://127.0.0.1:8080/api/systeminfo').then((res) => {
+      res.json().then((data) => {
+        this.config.data[0].value = data.webUptime
+        this.config.data[1].value = data.voipUptime
+        this.config.data[2].value = data.systemUptime
+        this.config = { ...this.config }
+      })
+    })
   }
 }
 </script>

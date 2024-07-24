@@ -1,21 +1,24 @@
 package main
 
 import (
-	"asterisk-monitor/web"
-	"io/fs"
-	"net/http"
+	"asterisk-monitor/api"
+	"asterisk-monitor/app/ami"
+	"sync"
 
-	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/ginS"
+	"github.com/sirupsen/logrus"
 )
 
-func main() {
-	root, _ := fs.Sub(web.WWWFiles, "www")
-	ginS.StaticFS("/www", http.FS(root))
-	ginS.GET("/", func(ctx *gin.Context) {
-		ctx.Redirect(http.StatusPermanentRedirect, "/www")
-	})
+var once sync.Once
 
-	ginS.GET("/hello", func(c *gin.Context) { c.String(200, "Hello World") })
-	ginS.Run()
+func main() {
+	go ami.StartAMI(func() {
+		logrus.Info("ami callback function")
+		// 首次连接才进行初始化
+		once.Do(func() {
+			// initAsterisk()
+			// agi.InitPageingPlan(configs.ConfigGlobal.AsteriskPagingPath)
+		})
+	}, []func(event map[string]string){})
+
+	api.HttpServer()
 }
