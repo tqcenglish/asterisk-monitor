@@ -4,8 +4,8 @@
 
     <div class="rc1-chart-container">
       <div class="left">
-        <div class="number">262</div>
-        <div>通话总数</div>
+        <div class="number">{{ total }}</div>
+        <div>线路总数</div>
       </div>
 
       <dv-capsule-chart class="right" :config="config" />
@@ -14,8 +14,9 @@
 </template>
 
 <script>
+import { trunkStatus } from './api'
 export default {
-  name: 'RightChart1',
+  name: 'Trunk',
   data () {
     return {
       config: {
@@ -27,22 +28,34 @@ export default {
           {
             name: '客服线路',
             value: 66
-          },
-          {
-            name: '备份线路',
-            value: 123
-          },
-          {
-            name: '未知线路',
-            value: 72
-          },
-          {
-            name: '其他',
-            value: 99
           }
-        ],
-        unit: '路'
-      }
+        ]
+        // unit: '路'
+      },
+      total: 0
+    }
+  },
+  created: function () {
+    this.getData()
+    this.timer = setInterval(() => {
+      this.getData()
+    }, 10000)
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+  },
+  methods: {
+    getData: function () {
+      trunkStatus().then((data) => {
+        this.total = data.length
+        this.config.data = data.map(item => {
+          return {
+            name: item.objectName,
+            value: item.status
+          }
+        })
+        this.config = { ...this.config }
+      })
     }
   }
 }

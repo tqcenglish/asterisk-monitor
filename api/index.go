@@ -33,5 +33,9 @@ func HttpServer() {
 	ginS.GET("/hello", func(c *gin.Context) { c.String(200, "Hello World") })
 	ginS.GET("/api/systeminfo", SystemInfo)
 	ginS.GET("/api/storageinfo", StorageInfo)
+	ginS.GET("/api/queuestatus", QueueStatus)
+	ginS.GET("/api/calllog", CallLog)
+	ginS.GET("/api/extensionstatus", Extensionstatus)
+	ginS.GET("/api/trunkstatus", Trunkstatus)
 	ginS.Run()
 }

@@ -8,32 +8,31 @@
 
     <div class="cc-details">
       <div>通话总数</div>
-      <div class="card">2</div>
-      <div class="card">1</div>
-      <div class="card">3</div>
-      <div class="card">7</div>
+      <div class="card" v-bind:key="data" v-for="data in total.toString()">
+        {{ data }}
+      </div>
     </div>
 
     <div class="cc-main-container">
       <div class="ccmc-left">
         <div class="station-info">
-          呼入<span>1315</span>
+          呼入<span style="width: 40px;">{{ incomingCallCount }}</span>
         </div>
         <div class="station-info">
-          呼出<span>415</span>
+          呼出<span style="width: 40px;">{{ outgoingCallCount }}</span>
+        </div>
+        <div class="station-info">
+          内部<span style="width: 40px;">{{ internalCallCount }}</span>
         </div>
       </div>
 
       <dv-active-ring-chart class="ccmc-middle" :config="config" />
 
-      <div class="ccmc-right">
+      <!-- <div class="ccmc-right">
         <div class="station-info">
-          <span>90</span>内部
+          <span>{{ internalCallCount }}</span>内部
         </div>
-        <div class="station-info">
-          <span>317</span>其他
-        </div>
-      </div>
+      </div> -->
 
       <LabelTag :config="labelConfig" />
     </div>
@@ -42,6 +41,7 @@
 
 <script>
 import LabelTag from './LabelTag'
+import { callLog } from './api'
 
 export default {
   name: 'CenterCmp',
@@ -54,19 +54,15 @@ export default {
         data: [
           {
             name: '呼入',
-            value: 1315
+            value: 10
           },
           {
             name: '呼出',
-            value: 415
+            value: 10
           },
           {
             name: '内部',
-            value: 90
-          },
-          {
-            name: '其他',
-            value: 317
+            value: 10
           }
         ],
         color: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
@@ -74,13 +70,43 @@ export default {
         radius: '55%',
         activeRadius: '60%'
       },
-
       labelConfig: {
-        data: ['呼入', '呼出', '内部', '其他']
-      }
+        data: ['呼入', '呼出', '内部']
+      },
+      total: 0,
+      incomingCallCount: 0,
+      outgoingCallCount: 0,
+      internalCallCount: 0
+
+    }
+  },
+  created: function () {
+    this.getData()
+    this.timer = setInterval(() => {
+      this.getData()
+    }, 60000)
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+  },
+  methods: {
+    getData () {
+      callLog().then((data) => {
+        const { config } = this
+        config.data[0].value = data.incomingCallCount
+        config.data[1].value = data.outgoingCallCount
+        config.data[2].value = data.internalCallCount
+        this.config = { ...config }
+
+        this.incomingCallCount = data.incomingCallCount
+        this.outgoingCallCount = data.outgoingCallCount
+        this.internalCallCount = data.internalCallCount
+        this.total = data.internalCallCount + data.incomingCallCount + data.outgoingCallCount
+      })
     }
   }
 }
+
 </script>
 
 <style lang="less">

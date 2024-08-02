@@ -3,14 +3,11 @@
     <dv-full-screen-container>
       <div class="main-header">
         <div class="mh-left">
-          <dv-border-box-2 style="width: 120px; height: 50px; line-height: 50px; text-align:center;margin-left:200px;">
-            <span v-on:click="fullScreen">综合管理台</span>
+          <dv-border-box-2 style="width: 140px; height: 50px; line-height: 50px; text-align:center;margin-left:200px;">
+            <span v-on:click="fullScreen">大数据平台</span>
           </dv-border-box-2>
         </div>
-        <div class="mh-middle">通话系统 监控</div>
-        <div class="mh-right">
-          <a href="https://github.com/jiaming743/DataV">技术支持</a>
-        </div>
+        <!-- <div class="mh-middle"></div> -->
       </div>
 
       <dv-border-box-1 class="main-container">
@@ -74,7 +71,6 @@ export default {
   },
   methods: {
     fullScreen: () => {
-      console.log('fullscreen')
       let app = document.querySelector('#app')
       if (!document.fullscreenElement) {
         app.requestFullscreen().catch((err) => {

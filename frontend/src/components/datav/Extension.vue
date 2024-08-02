@@ -4,7 +4,7 @@
 
     <div class="rc1-chart-container">
       <div class="left">
-        <div class="number">67</div>
+        <div class="number">{{ total }}</div>
         <div>分机总数</div>
       </div>
 
@@ -14,8 +14,9 @@
 </template>
 
 <script>
+import { extensionStatus } from './api'
 export default {
-  name: 'RightChart2',
+  name: 'Extension',
   data () {
     return {
       option: {
@@ -23,18 +24,16 @@ export default {
           {
             type: 'pie',
             data: [
-              { name: '在线', value: 93 },
-              { name: '通话中', value: 66 },
-              { name: '响铃', value: 52 },
-              { name: '离线', value: 34 },
-              { name: '其他', value: 22 }
+              { name: '在线', value: 1 },
+              { name: '通话中', value: 1 },
+              { name: '离线', value: 1 }
             ],
             radius: ['45%', '65%'],
             insideLabel: {
               show: false
             },
             outsideLabel: {
-              labelLineEndLength: 10,
+              labelLineEndLength: 20,
               formatter: '{percent}%\n{name}',
               style: {
                 fontSize: 14,
@@ -43,8 +42,37 @@ export default {
             }
           }
         ],
-        color: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b']
-      }
+        color: ['#00baff', '#3de7c9', '#ffc530', '#469f4b']
+      },
+      total: 0
+    }
+  },
+  created: function () {
+    this.getData()
+    this.timer = setInterval(() => {
+      this.getData()
+    }, 3000)
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+  },
+  methods: {
+    getData: function () {
+      extensionStatus().then((data) => {
+      // Busy
+      // In use
+      // Not in use
+      // On Hold
+      // Ringing
+      // Unavailable
+        // console.log(data)
+        this.option.series[0].data[0].value = data['Not in use']
+        this.option.series[0].data[1].value = data['Busy'] + data['In use'] + data['Ringing']
+        this.option.series[0].data[2].value = data['Unavailable']
+
+        this.option = { ...this.option }
+        this.total = data['Not in use'] + data['Busy'] + data['In use'] + data['Ringing'] + data['Unavailable']
+      })
     }
   }
 }

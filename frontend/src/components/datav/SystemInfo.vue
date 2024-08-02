@@ -1,13 +1,14 @@
 <template>
   <div class="left-chart-1">
     <div class="lc1-header">设备信息</div>
-    <div class="lc1-details">无故障运行时间<span>99 小时 </span></div>
+    <div class="lc1-details">无故障运行时间<span>{{ maxTime }} 小时 </span></div>
     <dv-capsule-chart class="lc1-chart" :config="config" />
     <dv-decoration-2 style="height:10px;" />
   </div>
 </template>
 
 <script>
+import { systeminfo } from './api'
 export default {
   name: 'SystemInfo',
   data () {
@@ -30,17 +31,18 @@ export default {
         // colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
         colors: ['#00baff', '#3de7c9', '#ffc530'],
         unit: '小时'
-      }
+      },
+      maxTime: 0
     }
   },
   created: function () {
-    fetch('http://127.0.0.1:8080/api/systeminfo').then((res) => {
-      res.json().then((data) => {
-        this.config.data[0].value = data.webUptime
-        this.config.data[1].value = data.voipUptime
-        this.config.data[2].value = data.systemUptime
-        this.config = { ...this.config }
-      })
+    systeminfo().then(data => {
+      this.config.data[0].value = data.webUptime
+      this.config.data[1].value = data.voipUptime
+      this.config.data[2].value = data.systemUptime
+      this.config = { ...this.config }
+
+      this.maxTime = data.systemUptime
     })
   }
 }
