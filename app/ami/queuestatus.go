@@ -76,6 +76,8 @@ type QueueParamsEvent struct {
 	ServicelevelPerf  string `json:"servicelevel_perf"`
 	ServicelevelPerf2 string `json:"servicelevel_perf2"`
 	Weight            string `json:"weight"`
+
+	Name string `json:"name"`
 }
 
 func QueueStatus() ([]*QueueParamsEvent, []*QueueMemberEvent, error) {

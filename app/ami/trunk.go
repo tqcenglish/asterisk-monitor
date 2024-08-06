@@ -12,6 +12,7 @@ type OutboundRegistrationDetail struct {
 	Status     string `json:"status"`
 }
 
+// 获取中继状态
 func TrunkStatus() ([]*OutboundRegistrationDetail, error) {
 	var action = map[string]string{
 		"Action": "PJSIPShowRegistrationsOutbound",

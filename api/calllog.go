@@ -15,6 +15,7 @@ type CallLogModel struct {
 	StartTime  string `xorm:"'start_time'" json:"startTime"`
 	CallStatus string `xorm:"'call_status'" json:"callStatus"`
 	CallType   string `xorm:"'call_type'" json:"callType"`
+	Trunk      string `xorm:"'trunk'" json:"trunk"`
 }
 
 func (*CallLogModel) TableName() string {

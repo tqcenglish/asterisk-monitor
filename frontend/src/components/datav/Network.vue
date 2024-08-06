@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { networkInfo } from './api'
 export default {
   name: 'LeftChart3',
   data () {
@@ -23,8 +24,29 @@ export default {
           }
         ],
         colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
-        unit: 'MB'
+        unit: 'byte'
       }
+    }
+  },
+
+  created: function () {
+    this.getData()
+    this.timer = setInterval(() => {
+      this.getData()
+    }, 10000)
+  },
+  beforeDestroy () {
+    clearInterval(this.timer)
+  },
+  methods: {
+    getData: function () {
+      networkInfo().then((data) => {
+        let { config } = this
+        config.data[0].value = data['tx']
+        config.data[1].value = data['rx']
+        console.log(data)
+        this.config = { ...config }
+      })
     }
   }
 }
@@ -32,6 +54,7 @@ export default {
 
 <style lang="less">
 .left-chart-3 {
+  margin-top: 30px;
   width: 100%;
   height: 33%;
   display: flex;

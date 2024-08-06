@@ -35,7 +35,7 @@
           </div>
 
           <dv-border-box-4 class="rmc-bottom-container">
-            <Bottom-Charts />
+            <Queue />
           </dv-border-box-4>
         </div>
       </dv-border-box-1>
@@ -53,7 +53,7 @@ import CenterCmp from './CenterCmp'
 import Trunk from './Trunk'
 import Extension from './Extension'
 
-import BottomCharts from './BottomCharts'
+import Queue from './Queue'
 
 export default {
   name: 'DataView',
@@ -64,7 +64,7 @@ export default {
     CenterCmp,
     Trunk,
     Extension,
-    BottomCharts
+    Queue
   },
   data () {
     return {}

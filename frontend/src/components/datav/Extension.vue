@@ -34,7 +34,7 @@ export default {
             },
             outsideLabel: {
               labelLineEndLength: 20,
-              formatter: '{percent}%\n{name}',
+              formatter: '{value}\n{name}',
               style: {
                 fontSize: 14,
                 fill: '#fff'
@@ -72,6 +72,7 @@ export default {
 
         this.option = { ...this.option }
         this.total = data['Not in use'] + data['Busy'] + data['In use'] + data['Ringing'] + data['Unavailable']
+        console.log(this.option)
       })
     }
   }

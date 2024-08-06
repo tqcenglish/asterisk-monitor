@@ -1,6 +1,6 @@
 <template>
   <div class="right-chart-1">
-    <div class="rc1-header">中继信息</div>
+    <div class="rc1-header">中继累计通话</div>
 
     <div class="rc1-chart-container">
       <div class="left">
@@ -47,11 +47,12 @@ export default {
   methods: {
     getData: function () {
       trunkStatus().then((data) => {
-        this.total = data.length
-        this.config.data = data.map(item => {
+        let keys = Object.keys(data)
+        this.total = keys.length
+        this.config.data = keys.map(item => {
           return {
-            name: item.objectName,
-            value: item.status
+            name: item,
+            value: data[item]
           }
         })
         this.config = { ...this.config }
@@ -69,6 +70,7 @@ export default {
   flex-direction: column;
 
   .rc1-header {
+    padding: 10px;
     font-size: 24px;
     font-weight: bold;
     height: 30px;

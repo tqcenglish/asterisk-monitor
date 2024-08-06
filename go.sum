@@ -100,8 +100,8 @@ github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsT
 github.com/stretchr/testify v1.9.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 github.com/syndtr/goleveldb v1.0.0 h1:fBdIW9lB4Iz0n9khmH8w27SJ3QEJ7+IgjPEwGSZiFdE=
 github.com/syndtr/goleveldb v1.0.0/go.mod h1:ZVVdQEZoIme9iO1Ch2Jdy24qqXrMMOU6lpPAyBWyWuQ=
-github.com/tqcenglish/amigo-go v1.1.14 h1:XIioEPj0+b4+EY+Cr0z8R33IwqnwWUS6w1FL9HUYTtE=
-github.com/tqcenglish/amigo-go v1.1.14/go.mod h1:R4D2J0kumfy0aJU5n4262rgXgqsRgeSr2NgDD4yWoFQ=
+github.com/tqcenglish/amigo-go v1.1.15 h1:lVVkEXZQSCR8EAX5tgySVTTa9ot9rSX2+RnKaviME6Q=
+github.com/tqcenglish/amigo-go v1.1.15/go.mod h1:R4D2J0kumfy0aJU5n4262rgXgqsRgeSr2NgDD4yWoFQ=
 github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS4MhqMhdFk5YI=
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
 github.com/ugorji/go/codec v1.2.12 h1:9LC83zGrHhuUA9l16C9AHXAqEV/2wBQ4nkvumAE65EE=

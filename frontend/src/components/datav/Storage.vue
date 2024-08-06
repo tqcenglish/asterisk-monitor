@@ -58,6 +58,7 @@ export default {
 
 <style lang="less">
 .left-chart-2 {
+  margin-top: 30px;
   width: 100%;
   height: 30%;
   display: flex;
