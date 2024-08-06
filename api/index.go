@@ -38,5 +38,5 @@ func HttpServer() {
 	ginS.GET("/api/extensionstatus", Extensionstatus)
 	ginS.GET("/api/trunkstatus", Trunkstatus)
 	ginS.GET("/api/networkinfo", NetworkInfo)
-	ginS.Run()
+	ginS.Run("0.0.0.0:8091")
 }

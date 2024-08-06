@@ -1,8 +1,18 @@
-// let apiUrl = 'http://127.0.0.1:8080/'
-let apiUrl = '/'
+let apiUrl = window.location.origin
+if (process.env.VUE_APP_ApiUrl) {
+  apiUrl = process.env.VUE_APP_ApiUrl
+}
 
 function callLog (params) {
   return fetch(`${apiUrl}/api/calllog`).then((res) => {
+    return res.json().then((data) => {
+      return data
+    })
+  })
+}
+
+function storageInfo (params) {
+  return fetch(`${apiUrl}/api/storageinfo`).then((res) => {
     return res.json().then((data) => {
       return data
     })
@@ -49,4 +59,4 @@ function networkInfo (params) {
   })
 }
 
-export { callLog, systeminfo, queueStatus, extensionStatus, trunkStatus, networkInfo }
+export { callLog, systeminfo, queueStatus, extensionStatus, trunkStatus, networkInfo, storageInfo }

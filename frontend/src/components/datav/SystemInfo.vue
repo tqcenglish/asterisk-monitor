@@ -37,10 +37,11 @@ export default {
   },
   created: function () {
     systeminfo().then(data => {
-      this.config.data[0].value = data.webUptime
-      this.config.data[1].value = data.voipUptime
-      this.config.data[2].value = data.systemUptime
-      this.config = { ...this.config }
+      let { config } = this
+      config.data[0].value = data.webUptime
+      config.data[1].value = data.voipUptime
+      config.data[2].value = data.systemUptime
+      this.config = { ...config }
 
       this.maxTime = data.systemUptime
     })

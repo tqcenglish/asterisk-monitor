@@ -13,3 +13,5 @@ build-ui:
 	cd frontend && npm run build
 build:
 	go build -tags "admin pprof" -o ./deployments/asterisk-monitor main.go
+build-arm:
+	GOOS=linux GOARCH=arm64 go build -tags "admin pprof" -o ./deployments/asterisk-monitor main.go

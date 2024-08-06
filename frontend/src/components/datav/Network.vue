@@ -9,22 +9,22 @@
 <script>
 import { networkInfo } from './api'
 export default {
-  name: 'LeftChart3',
+  name: 'Network',
   data () {
     return {
       config: {
         data: [
           {
             name: '发送流量',
-            value: 78
+            value: 1
           },
           {
             name: '接收流量',
-            value: 54
+            value: 1
           }
         ],
         colors: ['#00baff', '#3de7c9', '#fff', '#ffc530', '#469f4b'],
-        unit: 'byte'
+        unit: 'Gb'
       }
     }
   },
@@ -33,7 +33,7 @@ export default {
     this.getData()
     this.timer = setInterval(() => {
       this.getData()
-    }, 10000)
+    }, 60000)
   },
   beforeDestroy () {
     clearInterval(this.timer)

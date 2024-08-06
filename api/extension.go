@@ -12,7 +12,6 @@ func Extensionstatus(ctx *gin.Context) {
 	data, err := ami.ExtnesionStatus()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err.Error())
-		return
 	}
 
 	// UNKNOWN
