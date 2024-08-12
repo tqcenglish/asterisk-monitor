@@ -16,11 +16,11 @@ export default {
       config: {
         data: [
           {
-            name: 'Web 服务时间',
+            name: 'Asterisk Reload 时间',
             value: 10
           },
           {
-            name: 'Asterisk 服务时间',
+            name: 'Asterisk Uptime 时间',
             value: 10
           },
           {
@@ -38,7 +38,7 @@ export default {
   created: function () {
     systeminfo().then(data => {
       let { config } = this
-      config.data[0].value = data.webUptime
+      config.data[0].value = data.voipReload
       config.data[1].value = data.voipUptime
       config.data[2].value = data.systemUptime
       this.config = { ...config }
